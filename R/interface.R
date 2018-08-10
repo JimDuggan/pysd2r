@@ -44,6 +44,9 @@ check_python_version <- function(){
 
 
 pysd_connect <- function (){
+  if(is.null(pysd)){
+    stop("pysd2r error: no connection to python via rectiulate...")
+  }
   structure(list(py_link=pysd,
                  model=c()),class="ipysd")
 }
@@ -54,9 +57,18 @@ read_vensim <- function(o, p1){
 }
 
 read_vensim.ipysd <- function(i, file){
-  m <- i$py_link$read_vensim(file)
-  i$model <- m
-  i
+  tryCatch(
+    {m <- i$py_link$read_vensim(file)
+     i$model <- m
+     i
+    },
+    error=function(cond) {
+      message("pysd2r error: cannot find file, check file path...")
+      message("Here's the original error message:")
+      message(cond)
+      return(NA)},
+    finally={
+    })
 }
 
 #------------------------------------------------------------------------------------

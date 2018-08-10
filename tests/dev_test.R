@@ -1,7 +1,7 @@
 # devtools::load_all()
 library(pysd2r)
 
-# make the link thorugh reticulate
+# make the link thorugh to reticulate
 py <- pysd2r::pysd_connect()
 
 # load a model
@@ -25,8 +25,6 @@ out1 <- pysd2r::run_model(py)
 l <- list("Initial Population"=9999)
 pysd2r::set_components(py,l)
 out3 <- pysd2r::run_model(py)
-
-
 
 
 # Checking a change in the time step
