@@ -5,6 +5,9 @@ Authors@R: person("Jim", "Duggan", email = "jim.duggan@nuigalway.ie", role = c("
 Description: Using the R package reticulate, this package creates an interface to the pysd toolset.
 Depends: R (>= 3.5.1)
 License: MIT
+URL: https://github.com/JimDuggan/pysd2r
 Encoding: UTF-8
 LazyData: true
-Imports: reticulate, tibble
+Imports: reticulate, tibble, knitr
+RoxygenNote: 6.1.0
+VignetteBuilder: knitr
