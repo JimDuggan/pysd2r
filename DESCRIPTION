@@ -1,0 +1,10 @@
+Package: pysd2r
+Title: Provides an R interface to pysd. Returns simulations as a tibble.
+Version: 0.1
+Authors@R: person("Jim", "Duggan", email = "jim.duggan@nuigalway.ie", role = c("aut", "cre"))
+Description: Using the R package reticulate, this package creates an interface to the pysd toolset.
+Depends: R (>= 3.5.1)
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: reticulate, tibble

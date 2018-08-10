@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xmile version="1.0" xmlns="http://docs.oasis-open.org/xmile/ns/XMILE/v1.0">
+	<header>
+		<product version="1.0" lang="en">Vensim</product>
+		<vendor>Ventana Systems, Inc.</vendor>
+		<created>
+		</created>
+		<modified>
+		</modified>
+		<name>
+		</name>
+		<caption>
+		</caption>
+	</header>
+	<sim_specs method="RK4" time_units="Year">
+		<start>1960</start>
+		<stop>2010</stop>
+		<dt>0.125</dt>
+	</sim_specs>
+	<dimensions>
+		<dim name="">
+		</dim>
+	</dimensions>
+	<model>
+		<variables>
+			<stock name="Population">
+				<units></units>
+				<doc></doc>
+				<eqn>INTEG (
+	Number Added,
+		Initial Population)</eqn>
+			</aux>
+			<aux name="Number Added">
+				<units></units>
+				<doc></doc>
+				<eqn>Growth Fraction*Population</eqn>
+			</aux>
+			<aux name="SAVEPER">
+				<units>Year</units>
+				<doc>The frequency with which output is stored.</doc>
+				<eqn>TIME STEP</eqn>
+			</aux>
+		</variables>
+	<model>
+</xmile>
