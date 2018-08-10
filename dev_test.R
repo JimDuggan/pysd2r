@@ -1,6 +1,9 @@
 # devtools::load_all()
 # system.file("models/vensim", "Population.mdl", package = "pysd2r")
 # system.file("models/xmile", "Population.xmile", package = "pysd2r")
+# NOTE: This file needs to move into the test space...
+
+
 library(pysd2r)
 
 # make the link thorugh to reticulate
