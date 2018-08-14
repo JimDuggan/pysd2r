@@ -5,41 +5,49 @@ library(tibble)
 pysd <- NULL
 
 check_python_version <- function(){
-  message("Checking for the python version...")
+  packageStartupMessage("Checking for the python version...")
   psys <- reticulate::import("sys")
   v <- strtoi(substr(psys$version,1,1))
-  message(paste("Version",psys$version,"detected..."))
+  packageStartupMessage(paste("Version",psys$version,"detected..."))
   if (v < 3){
-    message("Load error: pysd2r has only been tested with python3...")
-    message("Check to see if RETICULATE_PYTHON points to python3")
-    message("Use the function reticulate::py_config()")
+    packageStartupMessage("Load error: pysd2r has only been tested with python3...")
+    packageStartupMessage("Check to see if RETICULATE_PYTHON points to python3")
+    packageStartupMessage("Use the function reticulate::py_config()")
     stop("Exiting pysd2r.")
   }
 }
 
-.onLoad <- function(libname, pkgname) {
+check_pysd_present <- function(){
   tryCatch(
     {
-      message("Checking for the pysd module...")
+      packageStartupMessage("Checking for the pysd module...")
       pysd <<- reticulate::import("pysd", delay_load = TRUE)
-      message("Successfully loaded pysd module...")
+      packageStartupMessage("Successfully loaded pysd module...")
     },
     error=function(cond) {
-      message("Cannot find pysd, ensure it is installed...")
-      message("Here's the original error message:")
-      message(cond)
+      packageStartupMessage("Cannot find pysd, ensure it is installed...")
+      packageStartupMessage("Here's the original error message:")
+      packageStartupMessage(cond)
       return(NA)
     },
     warning=function(cond) {
-      message("Here's the original warning message:")
-      message(cond)
+      packageStartupMessage("Here's the original warning message:")
+      packageStartupMessage(cond)
       # Choose a return value in case of warning
       return(NULL)
     },
     finally={
     }
   )
-  #check_python_version()
+}
+
+.onLoad <- function(libname, pkgname) {
+  check_pysd_present()
+  check_python_version()
+}
+
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage("Welcome to package pysd2r...")
 }
 
 #' Creates an object to facilitate interaction with pysd
@@ -81,16 +89,16 @@ read_vensim <- function(o, file){
 }
 
 #' @export
-read_vensim.ipysd <- function(i, file){
+read_vensim.ipysd <- function(o, file){
   tryCatch(
-    {m <- i$py_link$read_vensim(file)
-     i$model <- m
-     i
+    {m <- o$py_link$read_vensim(file)
+     o$model <- m
+     o
     },
     error=function(cond) {
-      message("pysd2r error: cannot find file, check file path...")
-      message("Here's the original error message:")
-      message(cond)
+      packageStartupMessage("pysd2r error: cannot find file, check file path...")
+      packageStartupMessage("Here's the original error message:")
+      packageStartupMessage(cond)
       return(NA)},
     finally={
     })
@@ -116,16 +124,16 @@ read_xmile <- function(o, file){
 }
 
 #' @export
-read_xmile.ipysd <- function(i, file){
+read_xmile.ipysd <- function(o, file){
   tryCatch(
-    {m <- i$py_link$read_xmile(file)
-    i$model <- m
-    i
+    {m <- o$py_link$read_xmile(file)
+    o$model <- m
+    o
     },
     error=function(cond) {
-      message("pysd2r error: cannot find file, check file path...")
-      message("Here's the original error message:")
-      message(cond)
+      packageStartupMessage("pysd2r error: cannot find file, check file path...")
+      packageStartupMessage("Here's the original error message:")
+      packageStartupMessage(cond)
       return(NA)},
     finally={
     })
@@ -146,8 +154,8 @@ run_model <- function(o){
 }
 
 #' @export
-run_model.ipysd <- function(i){
-  o <- tibble::as_data_frame(i$model$run())
+run_model.ipysd <- function(o){
+  out <- tibble::as_data_frame(o$model$run())
 }
 
 #' Changes a model parameter
@@ -166,9 +174,9 @@ set_components <- function(o,vals){
 }
 
 #' @export
-set_components.ipysd <- function(i,vals){
+set_components.ipysd <- function(o,vals){
   conv <- reticulate::r_to_py(vals)
-  i$model$set_components(params = conv)
+  o$model$set_components(params = conv)
 }
 
 #' Gets the time step (DT) from the model
@@ -185,8 +193,8 @@ get_timestep <- function(o){
 }
 
 #' @export
-get_timestep.ipysd <- function(i){
-  i$model$components$time_step()
+get_timestep.ipysd <- function(o){
+  o$model$components$time_step()
 }
 
 #' Gets the initial time from the model
@@ -203,8 +211,8 @@ get_initial_time <- function(o){
 }
 
 #' @export
-get_initial_time.ipysd <- function(i){
-  i$model$components$initial_time()
+get_initial_time.ipysd <- function(o){
+  o$model$components$initial_time()
 }
 #' Gets the initial time from the model
 #'
@@ -220,6 +228,6 @@ get_final_time <- function(o){
 }
 
 #' @export
-get_final_time.ipysd <- function(i){
-  i$model$components$final_time()
+get_final_time.ipysd <- function(o){
+  o$model$components$final_time()
 }
