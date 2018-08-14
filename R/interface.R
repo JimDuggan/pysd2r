@@ -21,10 +21,10 @@ check_python_version <- function(){
 check_pysd_present <- function(){
   tryCatch(
     {
-      packageStartupMessage("Checking for the pysd module...")
+      #packageStartupMessage("Checking for the pysd module...")
       pysd <- reticulate::import("pysd")
-      packageStartupMessage("Successfully loaded pysd module...")
-      print("Successfully loaded pysd module...")
+      #packageStartupMessage("Successfully loaded pysd module...")
+      #print("Successfully loaded pysd module...")
       pysd
     },
     error=function(cond) {
