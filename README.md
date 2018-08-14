@@ -1,10 +1,14 @@
 # pysdr
-An R wrapper for pysd, using the CRAN reticulate package
+An R wrapper for pysd, using the CRAN reticulate package.
 
 The goal of this package is to allow R users run system dynamics models using the [pysd](
 https://pysd.readthedocs.io/en/master/), developed by James Houghton. The pysd
 project "is a simple library for running System Dynamics models in python, with the purpose of 
 improving integration of Big Data and Machine Learning into the SD workflow."
+
+The pysd system must be installed before installing this package: [see pysd installation instructions](
+https://pysd.readthedocs.io/en/master/installation.html)
+
 
 Given R's facility for also providing big data and machine learning support, this package opens up the functionality of pysd for R users, and provides an interface to the basic set of methods provided by pysd, including the functions:
 
@@ -43,13 +47,6 @@ With this reference, the simulation can be run by calling the run_model() functi
 
 ```R
 results <- run_model(py)
-```
-
-The results from the tibble can be shown.
-
-
-```R
-results
 ```
 
 These results can also be processed using ggplot2.
