@@ -8,7 +8,7 @@ Description: Using the R package reticulate, this package creates an interface t
     that the results can be processed using dplyr and ggplot2. The package has been tested  using python3.
 License: MIT + file LICENSE
 Depends: R (>= 3.3)
-URL: https://github.com/JimDuggan/pysd2r 
+URL: https://github.com/JimDuggan
 Encoding: UTF-8
 LazyData: true
 Imports: knitr,

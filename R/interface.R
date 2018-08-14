@@ -2,7 +2,8 @@
 library(reticulate)
 library(tibble)
 
-pysd <- NULL
+pysd   <- NULL
+LinkOK <- FALSE
 
 check_python_version <- function(){
   packageStartupMessage("Checking for the python version...")
@@ -11,7 +12,7 @@ check_python_version <- function(){
   packageStartupMessage(paste("Version",psys$version,"detected..."))
   if (v < 3){
     packageStartupMessage("Load error: pysd2r has only been tested with python3...")
-    packageStartupMessage("Check to see if RETICULATE_PYTHON points to python3")
+    packageStartupMessage("Check to see that RETICULATE_PYTHON points to python3")
     packageStartupMessage("Use the function reticulate::py_config() to check current configuration")
     stop("Exiting pysd2r.")
   }
@@ -21,8 +22,9 @@ check_pysd_present <- function(){
   tryCatch(
     {
       packageStartupMessage("Checking for the pysd module...")
-      pysd <<- reticulate::import("pysd", delay_load = TRUE)
+      pysd <<- reticulate::import("pysd")
       packageStartupMessage("Successfully loaded pysd module...")
+      print("Successfully loaded pysd module...")
     },
     error=function(cond) {
       packageStartupMessage("Cannot find pysd, ensure it is installed...")
@@ -41,9 +43,10 @@ check_pysd_present <- function(){
   )
 }
 
+
 .onLoad <- function(libname, pkgname) {
-  check_pysd_present()
-  check_python_version()
+  #check_pysd_present()
+  #check_python_version()
 }
 
 .onAttach <- function(libname, pkgname) {
@@ -63,9 +66,12 @@ check_pysd_present <- function(){
 #' @return An S3 object of class ipysd
 #' @export
 pysd_connect <- function (){
+  check_pysd_present()
+  check_python_version()
   if(is.null(pysd)){
     stop("pysd2r error: no connection to python via rectiulate...")
   }
+  LinkOK<<-T
   structure(list(py_link=pysd,
                  model=c()),class="ipysd")
 }
@@ -85,6 +91,8 @@ pysd_connect <- function (){
 #' @return An S3 object of class ipysd that will contain a reference to the model
 #' @export
 read_vensim <- function(o, file){
+  if(!LinkOK)
+    stop("No link established to pysd, exiting pysd2r.")
   UseMethod("read_vensim")
 }
 
@@ -120,6 +128,8 @@ read_vensim.ipysd <- function(o, file){
 #' @return An S3 object of class ipysd that will contain a reference to the model
 #' @export
 read_xmile <- function(o, file){
+  if(!LinkOK)
+    stop("No link established to pysd, exiting pysd2r.")
   UseMethod("read_xmile")
 }
 
