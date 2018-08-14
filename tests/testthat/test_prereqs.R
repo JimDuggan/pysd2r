@@ -13,13 +13,13 @@ test_that("Xmile mdl file is available ...", {
   expect_true(grepl("models/xmile/Population.xmile", target))
 })
 
-#test_that("Connection to pysd vensim model reads ok...", {
-#  skip_on_cran() # as pysd may not be installed on CRAN
-#  target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
-#  py <- pysd2r::pysd_connect()
-#  py <- pysd2r::read_vensim(py, target)
-#  expect_equal(py$model$components$initial_time(), 1960)
-#})
+test_that("Connection to pysd vensim model reads ok...", {
+  skip_on_cran() # as pysd may not be installed on CRAN
+  target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+  py <- pysd2r::pysd_connect()
+  py <- pysd2r::read_vensim(py, target)
+  expect_equal(py$model$components$initial_time(), 1960)
+})
 
 #test_that("Connection to pysd vensim xmile reads ok...", {
 # skip_on_cran() # as pysd may not be installed on CRAN
