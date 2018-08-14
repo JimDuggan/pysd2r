@@ -14,7 +14,7 @@ Given R's facility for also providing big data and machine learning support, thi
 
 The following example shows how pysd2r can be used to run a simulation model (Population.mdl which is a one-stock model of population growth)
 
-```{r, message=F}
+```R
 library(pysd2r)  # load pysd2r
 library(ggplot2) # load ggplot2
 library(tibble)  # load tibble
@@ -22,39 +22,39 @@ library(tibble)  # load tibble
 
 First, a connection is made to pysd
 
-```{r, message=F}
+```R
 py <- pysd_connect()
 ```
 
 Next, the vensim file is opened.
 
-```{r, message=F}
+```R
 target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
 py <- read_vensim(py, target)
 ```
 
 The returning object (ipysd, and S3 class) can be inspected. This is a list with two elements. The first is the reference to pysd, the second is a referece to the translated python model
 
-```{r}
+```R
 str(py)
 ```
 
 With this reference, the simulation can be run by calling the run_model() function.
 
-```{r}
+```R
 results <- run_model(py)
 ```
 
 The results from the tibble can be shown.
 
 
-```{r}
+```R
 results
 ```
 
 These results can also be processed using ggplot2.
 
-```{r}
+```R
 ggplot(data=results)+
   geom_point(aes(x=TIME,y=Population),colour="blue")
 ```
