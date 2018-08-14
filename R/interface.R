@@ -12,7 +12,7 @@ check_python_version <- function(){
   if (v < 3){
     packageStartupMessage("Load error: pysd2r has only been tested with python3...")
     packageStartupMessage("Check to see if RETICULATE_PYTHON points to python3")
-    packageStartupMessage("Use the function reticulate::py_config()")
+    packageStartupMessage("Use the function reticulate::py_config() to check current configuration")
     stop("Exiting pysd2r.")
   }
 }
@@ -47,8 +47,7 @@ check_pysd_present <- function(){
 }
 
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Welcome to package pysd2r...")
-  packageStartupMessage("Ensure that RETICULATE_PYTHON is setup and points to python3...")
+  packageStartupMessage("Welcome to package pysd2r.")
 }
 
 #' Creates an object to facilitate interaction with pysd
