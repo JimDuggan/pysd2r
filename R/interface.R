@@ -1,4 +1,4 @@
-# Sys.setenv(RETICULATE_PYTHON="/usr/local/bin/python3")
+# MAy need this path set Sys.setenv(RETICULATE_PYTHON="/usr/local/bin/python3")
 library(reticulate)
 library(tibble)
 
@@ -48,6 +48,7 @@ check_pysd_present <- function(){
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Welcome to package pysd2r...")
+  packageStartupMessage("Ensure that RETICULATE_PYTHON is setup and points to python3...")
 }
 
 #' Creates an object to facilitate interaction with pysd

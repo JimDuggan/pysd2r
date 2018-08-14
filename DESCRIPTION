@@ -1,15 +1,20 @@
 Package: pysd2r
 Title: Provides an R interface to pysd. Returns simulation runs as a tibble
-Version: 0.1
+Version: 1.0.0
 Authors@R: person("Jim", "Duggan", email = "jim.duggan@nuigalway.ie", role = c("aut", "cre"))
-Description: Using the R package reticulate, 
-   this package creates an interface to the pysd toolset.
+Description: Using the R package reticulate, this package creates an interface to the pysd toolset.
+    The package provides an R interface to a number of pysd functions, which allows mdl and xmile
+    files to be read and simulated. The resulting simulations are returned as a tibble, and from 
+    that the results can be processed using dplyr and ggplot2. The package has been tested 
+    successfuly using python3
 License: MIT + file LICENSE
 Depends: R (>= 3.3)
-URL: https://github.com/JimDuggan
+URL: https://github.com/JimDuggan/pysd2r 
 Encoding: UTF-8
 LazyData: true
-Imports: reticulate, tibble, knitr
+Imports: reticulate, 
+         tibble 
+Suggests: dplyr,
+          ggplot2
 RoxygenNote: 6.1.0
 VignetteBuilder: knitr
-Suggests: testthat
