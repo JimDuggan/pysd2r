@@ -6,10 +6,10 @@ pysd   <- NULL
 
 
 check_python_version <- function(){
-  packageStartupMessage("Checking for the python version...")
+  #packageStartupMessage("Checking for the python version...")
   psys <- reticulate::import("sys")
   v <- strtoi(substr(psys$version,1,1))
-  packageStartupMessage(paste("Version",psys$version,"detected..."))
+  #packageStartupMessage(paste("Version",psys$version,"detected..."))
   if (v < 3){
     packageStartupMessage("Load error: pysd2r has only been tested with python3...")
     packageStartupMessage("Check to see that RETICULATE_PYTHON points to python3")
@@ -74,6 +74,8 @@ pysd_connect <- function (){
     stop("pysd2r error: no connection to python via rectiulate...")
   }
   structure(list(py_link=pysd,
+                 connected=T,
+                 loaded_model=F,
                  model=c()),class="ipysd")
 }
 
@@ -92,6 +94,8 @@ pysd_connect <- function (){
 #' @return An S3 object of class ipysd that will contain a reference to the model
 #' @export
 read_vensim <- function(o, file){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() befoe read_vensim()")
   UseMethod("read_vensim")
 }
 
@@ -99,6 +103,7 @@ read_vensim <- function(o, file){
 read_vensim.ipysd <- function(o, file){
   tryCatch(
     {m <- o$py_link$read_vensim(file)
+     o$loaded_model <- TRUE
      o$model <- m
      o
     },
@@ -127,6 +132,8 @@ read_vensim.ipysd <- function(o, file){
 #' @return An S3 object of class ipysd that will contain a reference to the model
 #' @export
 read_xmile <- function(o, file){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() befoe read_xmile()")
   UseMethod("read_xmile")
 }
 
@@ -134,6 +141,7 @@ read_xmile <- function(o, file){
 read_xmile.ipysd <- function(o, file){
   tryCatch(
     {m <- o$py_link$read_xmile(file)
+    o$loaded_model <- TRUE
     o$model <- m
     o
     },
@@ -157,6 +165,10 @@ read_xmile.ipysd <- function(o, file){
 #' @return tibble containing the simulation results
 #' @export
 run_model <- function(o){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() befoe run_model()")
+  if(o$loaded_model == F)
+    stop("Error, no model loaded...")
   UseMethod("run_model")
 }
 
@@ -177,6 +189,10 @@ run_model.ipysd <- function(o){
 #' @param vals contains a list with the parameter and value to be changed
 #' @export
 set_components <- function(o,vals){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() befoe set_components()")
+  if(o$loaded_model == F)
+    stop("Error, no model loaded...")
   UseMethod("set_components")
 }
 
@@ -196,6 +212,10 @@ set_components.ipysd <- function(o,vals){
 #' @return The simulation time step
 #' @export
 get_timestep <- function(o){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() befoe get_timestep()")
+  if(o$loaded_model == F)
+    stop("Error, no model loaded...")
   UseMethod("get_timestep")
 }
 
@@ -237,4 +257,30 @@ get_final_time <- function(o){
 #' @export
 get_final_time.ipysd <- function(o){
   o$model$components$final_time()
+}
+
+#' Sets the initial time, final time, and timestep
+#'
+#' \code{set_time_valuesl()} sets the simulation times and DT
+#'
+#' @param o is the ipysd S3 object
+#' @param init is the initial time
+#' @param final is the final time
+#' @param DT is the time step
+#' @export
+set_time_values <- function(o, init, final, DT){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() befoe run_model()")
+  if(o$loaded_model == F)
+    stop("Error, no model loaded...")
+  UseMethod("set_time_values")
+}
+#' @export
+set_time_values.ipysd <- function(o, init, final, DT){
+  init <- reticulate::r_to_py(list("Initial Time"=init))
+  o$model$set_components(params = init)
+  ft <- reticulate::r_to_py(list("Final Time"=final))
+  o$model$set_components(params = ft)
+  dt <- reticulate::r_to_py(list("Time Step"=DT))
+  o$model$set_components(params = dt)
 }
