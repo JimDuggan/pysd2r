@@ -241,7 +241,7 @@ get_initial_time <- function(o){
 get_initial_time.ipysd <- function(o){
   o$model$components$initial_time()
 }
-#' Gets the initial time from the model
+#' Gets the final time from the model
 #'
 #' \code{get_timestep} uses pysd to fetch the time step from the model
 #'

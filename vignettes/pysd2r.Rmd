@@ -19,6 +19,19 @@ Given R's facility for also providing big data and machine learning support, thi
 * pysd.read_vensim()
 * model.run()
 
+The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R):
+
+* **pysd_connect()** - Creates an object to facilitate interaction with pysd
+* **read_vensim()** - Loads a Vensim simulation file (mdl)
+* **read_xmile()** - Loads a XMILE simulation file (.xmile)
+* **run_model()**  - Runs a simulation model
+* **set_components()** - Changes a model parameter
+* **get_timestep()** - Gets the time step (DT) from the model
+* **get_initial_time()** - Gets the initial time from the model
+* **get_final_time()** - Gets the final time from the model
+* **set_time_values()** - Sets the initial time, final time, and timestep
+
+
 The following example shows how pysd2r can be used to run a simulation model (Population.mdl which is a one-stock model of population growth)
 
 ```{r, eval=F}
