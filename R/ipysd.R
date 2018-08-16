@@ -298,7 +298,7 @@ set_time_values.ipysd <- function(o, init, final, DT){
 #' @export
 print.ipysd <- function(x,...){
   cat("================================================================================\n")
-  cat("Printing details of ipysd object\n")
+  cat("Printing details of ipysd interface object\n")
   cat(paste("Connected = ",x$connected,"\n"))
   cat(paste("Connected Time = ",x$connect_time,"\n"))
   cat(paste("Loaded Model = ",x$loaded_model,"\n"))
