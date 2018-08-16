@@ -9,6 +9,11 @@ improving integration of Big Data and Machine Learning into the SD workflow."
 The pysd system must be installed before installing this package: [see pysd installation instructions](
 https://pysd.readthedocs.io/en/master/installation.html)
 
+pysd2r has been tested with python3, and the following command was used to install pysd from source.
+
+[Source link:](https://github.com/JamesPHoughton/pysd)
+
+**python3 setup.py install**
 
 Given R's facility for also providing big data and machine learning support, this package opens up the functionality of pysd for R users, and provides an interface to the basic set of methods provided by pysd, including the functions:
 
@@ -28,6 +33,7 @@ The API provide by pysd2r includes the following functions (for list of paramete
 * **get_initial_time()** - Gets the initial time from the model
 * **get_final_time()** - Gets the final time from the model
 * **set_time_values()** - Sets the initial time, final time, and timestep
+* **print()** - Implementation of generic print function of ipysd S3 object
 
 
 The following example shows how pysd2r can be used to run a simulation model (Population.mdl which is a one-stock model of population growth)

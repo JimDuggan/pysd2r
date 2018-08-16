@@ -3,6 +3,7 @@
 S3method(get_final_time,ipysd)
 S3method(get_initial_time,ipysd)
 S3method(get_timestep,ipysd)
+S3method(print,ipysd)
 S3method(read_vensim,ipysd)
 S3method(read_xmile,ipysd)
 S3method(run_model,ipysd)

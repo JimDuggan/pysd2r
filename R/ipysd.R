@@ -2,9 +2,6 @@
 library(reticulate)
 library(tibble)
 
-pysd   <- NULL
-
-
 check_python_version <- function(){
   #packageStartupMessage("Checking for the python version...")
   psys <- reticulate::import("sys")
@@ -13,7 +10,7 @@ check_python_version <- function(){
   if (v < 3){
     packageStartupMessage("Load error: pysd2r has only been tested with python3...")
     packageStartupMessage("Check to see that RETICULATE_PYTHON points to python3")
-    packageStartupMessage("Use the function reticulate::py_config() to check current configuration")
+    packageStartupMessage("Use the function pysd2r::get_python_info() to check current configuration")
     stop("Exiting pysd2r.")
   }
 }
@@ -87,6 +84,7 @@ pysd_connect <- function (){
   }
   structure(list(py_link=pysd,
                  connected=T,
+                 connect_time=Sys.time(),
                  loaded_model=F,
                  model=c()),class="ipysd")
 }
@@ -295,4 +293,15 @@ set_time_values.ipysd <- function(o, init, final, DT){
   o$model$set_components(params = ft)
   dt <- reticulate::r_to_py(list("Time Step"=DT))
   o$model$set_components(params = dt)
+}
+
+#' @export
+print.ipysd <- function(x,...){
+  cat("================================================================================\n")
+  cat("Printing details of ipysd object\n")
+  cat(paste("Connected = ",x$connected,"\n"))
+  cat(paste("Connected Time = ",x$connect_time,"\n"))
+  cat(paste("Loaded Model = ",x$loaded_model,"\n"))
+  cat(paste("Model = ",x$model,"\n"))
+  cat("================================================================================\n")
 }
