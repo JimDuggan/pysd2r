@@ -57,6 +57,18 @@ check_pysd_present <- function(){
 
 #' Creates an object to facilitate interaction with pysd
 #'
+#' \code{get_python_version} returns information on what version of python
+#' is being used with reticulate
+#'
+#'
+#' @return python information
+#' @export
+get_python_info <- function(){
+  reticulate::py_config()
+}
+
+#' Creates an object to facilitate interaction with pysd
+#'
 #' \code{pysd_connect} returns a ipysd object to the calling program.
 #' This object will contain a link variable to pysd and will subsequently
 #' store a reference to the simulation model in pysd.

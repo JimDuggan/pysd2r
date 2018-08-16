@@ -18,6 +18,7 @@ Given R's facility for also providing big data and machine learning support, thi
 
 The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R):
 
+* **get_python_info()** - Returns the python version currently used by reticulate
 * **pysd_connect()** - Creates an object to facilitate interaction with pysd
 * **read_vensim()** - Loads a Vensim simulation file (mdl)
 * **read_xmile()** - Loads a XMILE simulation file (.xmile)
