@@ -1,6 +1,6 @@
 Package: pysd2r
 Title: Provides an R api to pysd
-Version: 1.0.0
+Version: 0.1.0
 Authors@R: person("Jim", "Duggan", email = "jim.duggan@nuigalway.ie", role = c("aut", "cre"))
 Description: Using the R package reticulate, this package creates an interface to the pysd toolset.
     The package provides an R interface to a number of pysd functions, which allows mdl and xmile

@@ -121,7 +121,7 @@ read_vensim.ipysd <- function(o, file){
       packageStartupMessage("pysd2r error: cannot find file, check file path...")
       packageStartupMessage("Here's the original error message:")
       packageStartupMessage(cond)
-      return(NA)},
+      return(o)},
     finally={
     })
 }
@@ -159,7 +159,7 @@ read_xmile.ipysd <- function(o, file){
       packageStartupMessage("pysd2r error: cannot find file, check file path...")
       packageStartupMessage("Here's the original error message:")
       packageStartupMessage(cond)
-      return(NA)},
+      return(o)},
     finally={
     })
 }
