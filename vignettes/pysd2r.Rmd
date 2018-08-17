@@ -25,6 +25,8 @@ Given R's facility for also providing big data and machine learning support, thi
 * pysd.read_vensim()
 * model.run()
 
+[**Report bugs or suggest features**](https://github.com/JimDuggan/pysd2r/issues)
+
 The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R):
 
 * **get_python_info()** - Returns the python version  currently used by reticulate

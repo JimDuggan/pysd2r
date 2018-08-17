@@ -1,6 +1,8 @@
 # pysdr
 An R wrapper for pysd, using the CRAN reticulate package.
 
+[**Report bugs or suggest features**](https://github.com/JimDuggan/pysd2r/issues)
+
 The goal of this package is to allow R users run system dynamics models using the [pysd](
 https://pysd.readthedocs.io/en/master/), developed by James Houghton. The pysd
 project "is a simple library for running System Dynamics models in python, with the purpose of 
