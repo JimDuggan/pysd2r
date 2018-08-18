@@ -2,6 +2,7 @@
 library(reticulate)
 library(tibble)
 
+#-------------------------------------------------------------------------------------
 check_python_version <- function(){
   #packageStartupMessage("Checking for the python version...")
   psys <- reticulate::import("sys")
@@ -15,6 +16,7 @@ check_python_version <- function(){
   }
 }
 
+#-------------------------------------------------------------------------------------
 check_pysd_present <- function(){
   tryCatch(
     {
@@ -41,20 +43,22 @@ check_pysd_present <- function(){
   )
 }
 
-
+#-------------------------------------------------------------------------------------
 .onLoad <- function(libname, pkgname) {
   #check_python_version()
   #check_pysd_present()
 
 }
 
+#-------------------------------------------------------------------------------------
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Welcome to package pysd2r.")
 }
 
-#' Creates an object to facilitate interaction with pysd
+#-------------------------------------------------------------------------------------
+#' Gets the current python configuration for reticulate
 #'
-#' \code{get_python_version} returns information on what version of python
+#' \code{get_python_info} returns information on what version of python
 #' is being used with reticulate
 #'
 #'
@@ -64,6 +68,7 @@ get_python_info <- function(){
   reticulate::py_config()
 }
 
+#-------------------------------------------------------------------------------------
 #' Creates an object to facilitate interaction with pysd
 #'
 #' \code{pysd_connect} returns a ipysd object to the calling program.
@@ -86,9 +91,11 @@ pysd_connect <- function (){
                  connected=T,
                  connect_time=Sys.time(),
                  loaded_model=F,
+                 reloaded_model=F,
                  model=c()),class="ipysd")
 }
 
+#-------------------------------------------------------------------------------------
 #' Loads a Vensim simulation file (mdl)
 #'
 #' \code{read_vensim()} calls \code{pysd.read_vensim()} and stores the object for
@@ -126,7 +133,7 @@ read_vensim.ipysd <- function(o, file){
     })
 }
 
-
+#-------------------------------------------------------------------------------------
 #' Loads a XMILE simulation file (.xmile)
 #'
 #' \code{read_xmile()} calls \code{pysd.read_xmile()} and stores the object for
@@ -164,6 +171,7 @@ read_xmile.ipysd <- function(o, file){
     })
 }
 
+#-------------------------------------------------------------------------------------
 #' Runs a simulation model
 #'
 #' \code{run_model()} calls \code{run} in pysd and returns all
@@ -187,6 +195,7 @@ run_model.ipysd <- function(o){
   out <- tibble::as_data_frame(o$model$run())
 }
 
+#-------------------------------------------------------------------------------------
 #' Changes a model parameter
 #'
 #' \code{set_components()} calls \code{.set_components()} and changes
@@ -212,6 +221,7 @@ set_components.ipysd <- function(o,vals){
   o$model$set_components(params = conv)
 }
 
+#-------------------------------------------------------------------------------------
 #' Gets the time step (DT) from the model
 #'
 #' \code{get_timestep} uses pysd to fetch the time step from the model
@@ -234,6 +244,7 @@ get_timestep.ipysd <- function(o){
   o$model$components$time_step()
 }
 
+#-------------------------------------------------------------------------------------
 #' Gets the initial time from the model
 #'
 #' \code{get_initial_time} uses pysd to fetch the time step from the model
@@ -251,6 +262,8 @@ get_initial_time <- function(o){
 get_initial_time.ipysd <- function(o){
   o$model$components$initial_time()
 }
+
+#-------------------------------------------------------------------------------------
 #' Gets the final time from the model
 #'
 #' \code{get_timestep} uses pysd to fetch the time step from the model
@@ -269,6 +282,7 @@ get_final_time.ipysd <- function(o){
   o$model$components$final_time()
 }
 
+#-------------------------------------------------------------------------------------
 #' Sets the initial time, final time, and timestep
 #'
 #' \code{set_time_valuesl()} sets the simulation times and DT
@@ -280,7 +294,7 @@ get_final_time.ipysd <- function(o){
 #' @export
 set_time_values <- function(o, init, final, DT){
   if(o$connected == F || is.null(o))
-    stop("Error, no connection made. Need to call pysd_connect() befoe run_model()")
+    stop("Error, no connection made. Need to call pysd_connect() first")
   if(o$loaded_model == F)
     stop("Error, no model loaded...")
   UseMethod("set_time_values")
@@ -293,8 +307,52 @@ set_time_values.ipysd <- function(o, init, final, DT){
   o$model$set_components(params = ft)
   dt <- reticulate::r_to_py(list("Time Step"=DT))
   o$model$set_components(params = dt)
+
 }
 
+#-------------------------------------------------------------------------------------
+#' Formats a table of variable names
+#'
+#' \code{get_doc()} Get mode variable names
+#'
+#' @param o is the ipysd S3 object
+#' @return tibble
+#' @export
+get_doc <- function(o){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() befoe get_doc()")
+  if(o$loaded_model == F)
+    stop("Error, no model loaded...")
+  UseMethod("get_doc")
+}
+#' @export
+get_doc.ipysd <- function(o){
+  tibble::as_data_frame(o$model$doc())
+}
+
+#-------------------------------------------------------------------------------------
+#' Reloads the model from original mdl file
+#'
+#' \code{reload_model()} Reloads the model
+#'
+#' @param o is the ipysd S3 object
+#' @return ipysd object
+#' @export
+reload_model <- function(o){
+  if(o$connected == F || is.null(o))
+    stop("Error, no connection made. Need to call pysd_connect() first")
+  if(o$loaded_model == F)
+    stop("Error, no model loaded...")
+  UseMethod("reload_model")
+}
+#' @export
+reload_model.ipysd <- function(o){
+  o$model$reload()
+  o$reloaded_model <- T
+  o$reload_time <- Sys.time()
+  o
+}
+#-------------------------------------------------------------------------------------
 #' @export
 print.ipysd <- function(x,...){
   cat("================================================================================\n")
@@ -302,6 +360,10 @@ print.ipysd <- function(x,...){
   cat(paste("Connected = ",x$connected,"\n"))
   cat(paste("Connected Time = ",x$connect_time,"\n"))
   cat(paste("Loaded Model = ",x$loaded_model,"\n"))
+  if(x$reloaded_model==TRUE){
+    cat(paste("Reloaded Model = ",x$reloaded_model,"\n"))
+    cat(paste("Reloaded Time = ",x$reload_time,"\n"))
+  }
   cat(paste("Model = ",x$model,"\n"))
   cat("================================================================================\n")
 }

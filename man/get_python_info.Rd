@@ -2,7 +2,7 @@
 % Please edit documentation in R/ipysd.R
 \name{get_python_info}
 \alias{get_python_info}
-\title{Creates an object to facilitate interaction with pysd}
+\title{Gets the current python configuration for reticulate}
 \usage{
 get_python_info()
 }
@@ -10,6 +10,6 @@ get_python_info()
 python information
 }
 \description{
-\code{get_python_version} returns information on what version of python
+\code{get_python_info} returns information on what version of python
 is being used with reticulate
 }

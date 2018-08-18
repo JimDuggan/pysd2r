@@ -1,8 +1,6 @@
 # pysdr
 An R wrapper for pysd, using the CRAN reticulate package.
 
-[**Report bugs or suggest features**](https://github.com/JimDuggan/pysd2r/issues)
-
 The goal of this package is to allow R users run system dynamics models using the [pysd](
 https://pysd.readthedocs.io/en/master/), developed by James Houghton. The pysd
 project "is a simple library for running System Dynamics models in python, with the purpose of 
@@ -23,7 +21,7 @@ Given R's facility for also providing big data and machine learning support, thi
 * pysd.read_vensim()
 * model.run()
 
-The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R):
+The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R) which call the mapping functions in pysd.
 
 * **get_python_info()** - Returns the python version currently used by reticulate
 * **pysd_connect()** - Creates an object to facilitate interaction with pysd
@@ -36,6 +34,8 @@ The API provide by pysd2r includes the following functions (for list of paramete
 * **get_final_time()** - Gets the final time from the model
 * **set_time_values()** - Sets the initial time, final time, and timestep
 * **print()** - Implementation of generic print function of ipysd S3 object
+* **get_doc()** - Gets the model variables and returns as a tibble
+* **reload_model()** - Reloads the original mdl file
 
 
 The following example shows how pysd2r can be used to run a simulation model (Population.mdl which is a one-stock model of population growth)
