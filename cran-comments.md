@@ -2,7 +2,7 @@
 Tests were executed based on automatic install from github (repository not yet public, auth token used)
 
 Command:
-devtools::install_github("JimDuggan/pysd2r", auth_token = "1b818ae98f783e8df4816a22d31755dff48e16c1")
+**devtools::install_github("JimDuggan/pysd2r", auth_token = "1b818ae98f783e8df4816a22d31755dff48e16c1")**
 
 Package deployed in three test environments, and also build_win() called.
 
