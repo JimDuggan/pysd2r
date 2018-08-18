@@ -21,3 +21,9 @@ Package deployed in three test environments, and also build_win() called.
 
 This is a new release, so there are no reverse dependencies.
 
+## Changes made following first submission 18th August 2018.
+
+* Placed all software references in quotes in title and description.
+* Ensured that LICENSE file followed CRAN format
+* Removed issues in relation to github (no longer required)
+
