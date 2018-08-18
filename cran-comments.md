@@ -27,3 +27,7 @@ This is a new release, so there are no reverse dependencies.
 * Ensured that LICENSE file followed CRAN format
 * Removed issues in relation to github (no longer required)
 
+Changed title field to title case:
+* was Provides an R API To Python Library 'pysd'
+* is now Provides an R API to Python Library 'pysd'
+
