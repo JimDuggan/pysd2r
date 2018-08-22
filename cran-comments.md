@@ -31,3 +31,8 @@ Changed title field to title case:
 * was Provides an R API To Python Library 'pysd'
 * is now Provides an R API to Python Library 'pysd'
 
+## Changes made following feedback on August 22nd.
+* Changed title to API to Python Library 'pysd'
+* Added blank after 'xmile' format
+* Please add small executable examples in your Rd-files.
+
