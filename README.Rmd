@@ -61,12 +61,12 @@ You can install pysd2r from github with:
 devtools::install_github("JimDuggan/pysd2r")
 ```
 
-## Example
+## Two Examples
 
 The following example shows how pysd2r can be used to run a simulation model (Population.mdl which is a one-stock Vensim model of population growth).
 
 
-```{r example}
+```{r example1}
 ## basic example code
 library(pysd2r)
 library(ggplot2)
@@ -90,3 +90,34 @@ ggplot(data=results)+
   geom_point(data=out2,aes(x=TIME,y=Population),colour="red")
 
 ```
+
+The following example shows how pysd2r can be used to run an ensemble of simulations.
+
+```{r example2}
+library(pysd2r)
+library(ggplot2)
+library(plyr)
+library(dplyr)
+
+target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+
+gr <- seq(0.01,0.04,by=0.0025)
+
+py <- pysd_connect()
+py <- read_vensim(py, target)
+
+ans <- lapply(gr, function (g){
+  l <- list("Growth Fraction"=g)
+  set_components(py,l)
+  out     <- run_model(py)
+  out$Key <- paste0("GR=",g)
+  out     <- select(out,TIME,Population,Key)
+})
+
+full <- rbind.fill(ans)
+
+ggplot(data=full)+
+  geom_point(aes(x=TIME,y=Population,colour=Key))
+
+```
+
