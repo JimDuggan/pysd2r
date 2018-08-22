@@ -34,5 +34,5 @@ Changed title field to title case:
 ## Changes made following feedback on August 22nd.
 * Changed title to API to Python Library 'pysd'
 * Added blank after 'xmile' format
-* Executable examples added in the  Rd-files.
+* Executable examples added in the Rd-files.
 
