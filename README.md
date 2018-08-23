@@ -1,11 +1,10 @@
+pysd2r
+================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-pysd2r
-======
-
 An R wrapper for pysd, using the CRAN reticulate package.
 
-The goal of this package is to allow R users run system dynamics models using the [pysd](https://pysd.readthedocs.io/en/master/), developed by James Houghton. The pysd project "is a simple library for running System Dynamics models in python, with the purpose of improving integration of Big Data and Machine Learning into the SD workflow."
+The goal of this package is to allow R users run system dynamics models using [pysd](https://pysd.readthedocs.io/en/master/), (designed and developed by [James Houghton](https://github.com/JamesPHoughton)). The pysd project "is a simple library for running System Dynamics models in python, with the purpose of improving integration of Big Data and Machine Learning into the SD workflow."
 
 The pysd system must be installed before installing this package: [see pysd installation instructions](https://pysd.readthedocs.io/en/master/installation.html)
 
@@ -76,7 +75,7 @@ ggplot(data=results)+
   geom_point(data=out2,aes(x=TIME,y=Population),colour="red")
 ```
 
-![](README-example1-1.png)
+![](man/figures/README-example1-1.png)
 
 The following example shows how pysd2r can be used to run an ensemble of simulations.
 
@@ -119,4 +118,4 @@ ggplot(data=full)+
   geom_point(aes(x=TIME,y=Population,colour=Key))
 ```
 
-![](README-example2-1.png)
+![](man/figures/README-example2-1.png)

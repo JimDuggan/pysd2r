@@ -1,5 +1,6 @@
 ---
 output: github_document
+title:  pysd2r
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -12,13 +13,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# pysd2r
-
 An R wrapper for pysd, using the CRAN reticulate package.
 
-The goal of this package is to allow R users run system dynamics models using the [pysd](
-https://pysd.readthedocs.io/en/master/), developed by James Houghton. The pysd
-project "is a simple library for running System Dynamics models in python, with the purpose of 
+The goal of this package is to allow R users run system dynamics models using [pysd](
+https://pysd.readthedocs.io/en/master/), (designed and developed by [James Houghton](https://github.com/JamesPHoughton)). 
+The pysd project "is a simple library for running System Dynamics models in python, with the purpose of 
 improving integration of Big Data and Machine Learning into the SD workflow."
 
 The pysd system must be installed before installing this package: [see pysd installation instructions](
