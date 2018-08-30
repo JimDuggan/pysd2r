@@ -20,5 +20,7 @@ store a reference to the simulation model in pysd.
 The result is used as a parameter for read_vensim() & read_xmile() functions
 }
 \examples{
-pysd_connect()
+\dontrun{
+py pysd_connect()
+}
 }

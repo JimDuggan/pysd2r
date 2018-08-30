@@ -19,6 +19,7 @@ a resulting parameter in the model
 As it's a generic function, this call is dispatched to set_component.isdpy
 }
 \examples{
+\dontrun{
 target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
 py <- pysd_connect()
 py <- read_vensim(py, target)
@@ -26,7 +27,5 @@ results <- run_model(py)
 l <- list("Growth Fraction"=0.02)
 set_components(py,l)
 out2 <- run_model(py)
-ggplot(data=results)+
-geom_point(aes(x=TIME,y=Population),colour="blue")+
-geom_point(data=out2,aes(x=TIME,y=Population),colour="red")
+}
 }

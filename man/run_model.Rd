@@ -20,8 +20,10 @@ the simulation output in tidy data format (tibble)
 As it's a generic function, this call is dispatched to run_model.isdpy
 }
 \examples{
+\dontrun{
 target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
 py <- pysd_connect()
 py <- read_vensim(py, target)
 results <- run_model(py)
+}
 }

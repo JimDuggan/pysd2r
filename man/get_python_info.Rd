@@ -14,5 +14,7 @@ python information
 is being used with reticulate
 }
 \examples{
+\dontrun{
 get_python_info()
+}
 }
