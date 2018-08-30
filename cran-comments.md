@@ -35,5 +35,6 @@ Changed title field to title case:
 
 ## Changes made following feedback on August 29th 2018
 * Added quotes to software name Python on title (DESCRIPTION)
+* Added add small executable examples in the Rd-files.
 
 
