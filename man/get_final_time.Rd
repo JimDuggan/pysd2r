@@ -18,3 +18,9 @@ The finaltime
 \details{
 As it's a generic function, this call is dispatched to set_component.isdpy
 }
+\examples{
+target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+py <- pysd_connect()
+py <- read_vensim(py, target)
+final_time <- get_final_time(py)
+}

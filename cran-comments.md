@@ -28,8 +28,12 @@ Changed title field to title case:
 * was Provides an R API To Python Library 'pysd'
 * is now Provides an R API to Python Library 'pysd'
 
-## Changes made following feedback on August 22nd.
+## Changes made following feedback on August 22nd 2018
 * Changed title to API to Python Library 'pysd'
 * Added blank after 'xmile' format
 * Executable examples added in the Rd-files, with PNG files moved to man/figures directory
+
+## Changes made following feedback on August 29th 2018
+* Added quotes to software name Python on title (DESCRIPTION)
+
 

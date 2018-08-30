@@ -24,3 +24,7 @@ The result is used as a parameter for simulation calls.
 
 As it's a generic function, this call is dispatched to read_xmile.isdpy
 }
+\examples{
+target <- system.file("models/xmile", "Population.xmile", package = "pysd2r")
+read_xmile(py, target)
+}

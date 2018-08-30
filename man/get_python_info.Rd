@@ -13,3 +13,6 @@ python information
 \code{get_python_info} returns information on what version of python
 is being used with reticulate
 }
+\examples{
+get_python_info()
+}

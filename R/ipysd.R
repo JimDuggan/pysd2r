@@ -64,6 +64,8 @@ check_pysd_present <- function(){
 #'
 #' @return python information
 #' @export
+#' @examples
+#' get_python_info()
 get_python_info <- function(){
   reticulate::py_config()
 }
@@ -81,6 +83,8 @@ get_python_info <- function(){
 #'
 #' @return An S3 object of class ipysd
 #' @export
+#' @examples
+#' pysd_connect()
 pysd_connect <- function (){
   check_python_version()
   pysd <- check_pysd_present()
@@ -110,6 +114,9 @@ pysd_connect <- function (){
 #' @param file is the filename and path for the Vensim mdl file that needs to be simulated
 #' @return An S3 object of class ipysd that will contain a reference to the model
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' read_vensim(py, target)
 read_vensim <- function(o, file){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() befoe read_vensim()")
@@ -148,6 +155,9 @@ read_vensim.ipysd <- function(o, file){
 #' @param file is the filename and path for the Vensim mdl file that needs to be simulated
 #' @return An S3 object of class ipysd that will contain a reference to the model
 #' @export
+#' @examples
+#' target <- system.file("models/xmile", "Population.xmile", package = "pysd2r")
+#' read_xmile(py, target)
 read_xmile <- function(o, file){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() befoe read_xmile()")
@@ -182,6 +192,11 @@ read_xmile.ipysd <- function(o, file){
 #' @param o is the ipysd S3 object
 #' @return tibble containing the simulation results
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' results <- run_model(py)
 run_model <- function(o){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() befoe run_model()")
@@ -207,6 +222,17 @@ run_model.ipysd <- function(o){
 #' @param o is the ipysd S3 object
 #' @param vals contains a list with the parameter and value to be changed
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' results <- run_model(py)
+#' l <- list("Growth Fraction"=0.02)
+#' set_components(py,l)
+#' out2 <- run_model(py)
+#' ggplot(data=results)+
+#' geom_point(aes(x=TIME,y=Population),colour="blue")+
+#' geom_point(data=out2,aes(x=TIME,y=Population),colour="red")
 set_components <- function(o,vals){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() befoe set_components()")
@@ -231,6 +257,11 @@ set_components.ipysd <- function(o,vals){
 #' @param o is the ipysd S3 object
 #' @return The simulation time step
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' time_step  <- get_timestep(py)
 get_timestep <- function(o){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() befoe get_timestep()")
@@ -254,6 +285,11 @@ get_timestep.ipysd <- function(o){
 #' @param o is the ipysd S3 object
 #' @return The initial time
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' initial_time <- get_initial_time(py)
 get_initial_time <- function(o){
   UseMethod("get_initial_time")
 }
@@ -273,6 +309,11 @@ get_initial_time.ipysd <- function(o){
 #' @param o is the ipysd S3 object
 #' @return The finaltime
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' final_time <- get_final_time(py)
 get_final_time <- function(o){
   UseMethod("get_final_time")
 }
@@ -292,6 +333,11 @@ get_final_time.ipysd <- function(o){
 #' @param final is the final time
 #' @param DT is the time step
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' set_time_values(py,0,10,0.5)
 set_time_values <- function(o, init, final, DT){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() first")
@@ -318,6 +364,11 @@ set_time_values.ipysd <- function(o, init, final, DT){
 #' @param o is the ipysd S3 object
 #' @return tibble
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' mdoc <- get_doc(py)
 get_doc <- function(o){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() befoe get_doc()")
@@ -338,6 +389,12 @@ get_doc.ipysd <- function(o){
 #' @param o is the ipysd S3 object
 #' @return ipysd object
 #' @export
+#' @examples
+#' target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+#' py <- pysd_connect()
+#' py <- read_vensim(py, target)
+#' set_time_values(py,0,10,0.5)
+#' py<-reload_model(py)
 reload_model <- function(o){
   if(o$connected == F || is.null(o))
     stop("Error, no connection made. Need to call pysd_connect() first")

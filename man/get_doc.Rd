@@ -15,3 +15,9 @@ tibble
 \description{
 \code{get_doc()} Get mode variable names
 }
+\examples{
+target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+py <- pysd_connect()
+py <- read_vensim(py, target)
+mdoc <- get_doc(py)
+}

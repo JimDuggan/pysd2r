@@ -1,5 +1,5 @@
 Package: pysd2r
-Title: API to Python Library 'pysd'
+Title: API to 'Python' Library 'pysd'
 Version: 0.1.0
 Authors@R: person("Jim", "Duggan", email = "jim.duggan@nuigalway.ie", role = c("aut", "cre"))
 Description: Using the R package 'reticulate', this package creates an interface to the 'pysd' toolset.

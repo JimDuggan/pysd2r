@@ -24,3 +24,7 @@ The result is used as a parameter for simulation calls.
 
 As it's a generic function, this call is dispatched to read_vensim.isdpy
 }
+\examples{
+target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+read_vensim(py, target)
+}

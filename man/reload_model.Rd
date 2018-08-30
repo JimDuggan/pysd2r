@@ -15,3 +15,10 @@ ipysd object
 \description{
 \code{reload_model()} Reloads the model
 }
+\examples{
+target <- system.file("models/vensim", "Population.mdl", package = "pysd2r")
+py <- pysd_connect()
+py <- read_vensim(py, target)
+set_time_values(py,0,10,0.5)
+py<-reload_model(py)
+}
