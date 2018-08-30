@@ -246,7 +246,7 @@ run_model.ipysd <- function(o){
 #'}
 set_components <- function(o,vals){
   if(o$connected == F || is.null(o))
-    stop("Error, no connection made. Need to call pysd_connect() befoe set_components()")
+    stop("Error, no connection made. Need to call pysd_connect() before set_components()")
   if(o$loaded_model == F)
     stop("Error, no model loaded...")
   UseMethod("set_components")
