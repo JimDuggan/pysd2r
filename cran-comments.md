@@ -37,4 +37,7 @@ Changed title field to title case:
 * Added quotes to software name Python on title (DESCRIPTION)
 * Added add small executable examples in the Rd-files.
 
+## Changes made following feedback on September 3rd 2018
+* Added 32/64 bit python3 requirement to DESCRIPTION file (SystemRequirements)
+
 
