@@ -18,3 +18,4 @@ Suggests: dplyr,
           testthat
 RoxygenNote: 6.1.0
 VignetteBuilder: knitr
+SystemRequirements: 'python3' needs to built for the same architecture R is built for (32 or 64 bit).
