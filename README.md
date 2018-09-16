@@ -75,7 +75,7 @@ ggplot(data=results)+
   geom_point(data=out2,aes(x=TIME,y=Population),colour="red")
 ```
 
-![](man/figures/README-example1-1.png)
+![](README-example1-1.png)
 
 The following example shows how pysd2r can be used to run an ensemble of simulations.
 
@@ -118,4 +118,6 @@ ggplot(data=full)+
   geom_point(aes(x=TIME,y=Population,colour=Key))
 ```
 
-![](man/figures/README-example2-1.png)
+![](README-example2-1.png)
+
+**Acknowledgements** *This project gratefully acknowledges the support of the Bill & Melinda Gates Foundation – Grand Challenges Explorations Initiative, Award Reference \#OPP1182305, "HealthSIM: A Supply Chain Simulator for Supply Chains."*
