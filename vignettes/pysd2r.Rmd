@@ -8,24 +8,24 @@ vignette: >
 ---
 
 #Introduction
-The goal of this package is to allow R users run system dynamics models using the [pysd](
-https://pysd.readthedocs.io/en/master/), developed by James Houghton. The pysd
-project "is a simple library for running System Dynamics models in python, with the purpose of 
+The goal of this package is to allow R users run system dynamics models using the [PySD](
+https://pysd.readthedocs.io/en/master/), designed and initially developed by James Houghton, and currently being developed by its user community.
+The PySD project "is a library for running System Dynamics models in Python, with the purpose of
 improving integration of Big Data and Machine Learning into the SD workflow."
 
-pysd2r has been tested with python3, and the following command was used to install pysd from source.
+pysd2r has been tested with Python3, and the following command was used to install PySD from source.
 
-[Source link:](https://github.com/JamesPHoughton/pysd)
+[Source link:](https://github.com/SDXorg/pysd)
 
 **python3 setup.py install**
 
-Given R's facility for also providing big data and machine learning support, this package opens up the functionality of pysd for R users, and provides an interface to the basic set of methods provided by pysd, including the functions:
+Given R's facility for also providing big data and machine learning support, this package opens up the functionality of PySD for R users, and provides an interface to the basic set of methods provided by PySD, including the functions:
 
 
 * pysd.read_vensim()
 * model.run()
 
-The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R) which call the mapping functions in pysd.
+The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R) which call the mapping functions in PySD.
 
 * **get_python_info()** - Returns the python version  currently used by reticulate
 * **pysd_connect()** - Creates an object to facilitate interaction with pysd

@@ -13,29 +13,29 @@ knitr::opts_chunk$set(
 )
 ```
 
-An R wrapper for pysd, using the CRAN reticulate package.
+An R wrapper for PySD, using the CRAN reticulate package.
 
-The goal of this package is to allow R users run system dynamics models using [pysd](
-https://pysd.readthedocs.io/en/master/), (designed and developed by [James Houghton](https://github.com/JamesPHoughton)). 
-The pysd project "is a simple library for running System Dynamics models in python, with the purpose of 
+The goal of this package is to allow R users run system dynamics models using [PySD](
+https://pysd.readthedocs.io/en/master/), (designed and initially developed by [James Houghton](https://github.com/JamesPHoughton)), and currently being developed by its user community.
+The PySD project "is a library for running System Dynamics models in Python, with the purpose of
 improving integration of Big Data and Machine Learning into the SD workflow."
 
-The pysd system must be installed before installing this package: [see pysd installation instructions](
+The PySD system must be installed before installing this package: [see PySD installation instructions](
 https://pysd.readthedocs.io/en/master/installation.html)
 
-pysd2r has been tested with python3, and the following command was used to install pysd from source.
+pysd2r has been tested with python3, and the following command was used to install PySD from source.
 
-[Source link:](https://github.com/JamesPHoughton/pysd)
+[Source link:](https://github.com/SDXorg/pysd)
 
 **python3 setup.py install**
 
-Given R's facility for also providing big data and machine learning support, this package opens up the functionality of pysd for R users, and provides an interface to the basic set of methods provided by pysd, including the functions:
+Given R's facility for also providing big data and machine learning support, this package opens up the functionality of PySD for R users, and provides an interface to the basic set of methods provided by PySD, including the functions:
 
 
 * pysd.read_vensim()
 * model.run()
 
-The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R) which call the mapping functions in pysd.
+The API provide by pysd2r includes the following functions (for list of parameters type ?*function_name* in R) which call the mapping functions in PySD.
 
 * **get_python_info()** - Returns the python version currently used by reticulate
 * **pysd_connect()** - Creates an object to facilitate interaction with pysd
